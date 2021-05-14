@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+    id 'application'
+}
+
+group 'com.seedfinding.neil'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+run {
+    args("overworld","7948314503011477316","8","10")
+}
+
+application {
+    mainClass.set("com.seedfinding.neil.Main")
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation('com.github.KaptainWutax:MathUtils:5531c4a87b0f1bb85d1dab2bdd18ce375400626a') { transitive = false }
+    implementation('com.github.KaptainWutax:SeedUtils:b6a383113ce5d8d09a59e91b28ff064fb97c0709') { transitive = false }
+    implementation('com.github.KaptainWutax:MCUtils:c0acdac614f0b6bf3b279f83910bd345d08a6ccb') { transitive = false }
+    implementation('com.github.KaptainWutax:NoiseUtils:a3954932b15a889aa51c82176942d62f291c3b12') { transitive = false }
+
+    implementation('com.github.KaptainWutax:BiomeUtils:43cbdbe4319790ecdfde89cc24077e8b3faf215c') {transitive = false}
+    implementation('com.github.KaptainWutax:TerrainUtils:21b6d72b7798403abf620f736d0f1972daf822ed') {transitive = false}
+    implementation('com.github.KaptainWutax:FeatureUtils:a8ac8b6a7fbf647b90775732545b8a01e11664b4'){transitive(false)}
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+}
